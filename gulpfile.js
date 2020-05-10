@@ -11,7 +11,7 @@ const bs = function (cb) {
       baseDir: "./public",
     },
     browser: "chrome",
-    // open: false
+    // open: false -- optional
   });
   cb();
 };
