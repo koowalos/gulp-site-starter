@@ -4,6 +4,7 @@ const browserSync = require("browser-sync").create();
 const clean = require("gulp-clean");
 const rename = require("gulp-rename");
 const concat = require("gulp-concat");
+const minify = require("gulp-minify");
 
 const bs = function (cb) {
   browserSync.init({
@@ -11,13 +12,12 @@ const bs = function (cb) {
       baseDir: "./public",
     },
     browser: "chrome",
-    // open: false -- optional
   });
   cb();
 };
 
 const cleanup = function (cb) {
-  src(["./public/assets/css", "./public/assets/js"], {
+  src(["./public/assets/css/**/*.*", "./public/assets/js/**/*.*"], {
     read: false,
     allowEmpty: true,
   }).pipe(clean());
@@ -32,6 +32,13 @@ const buildSass = function (cb) {
 const scriptMerge = function (cb) {
   src("public/src/js/*.js")
     .pipe(concat("script.js"))
+    .pipe(
+      minify({
+        ext: {
+          min: ".min.js",
+        },
+      })
+    )
     .pipe(dest("public/assets/js"));
   cb();
 };
