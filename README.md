@@ -9,3 +9,4 @@ My quick starter for building basic HTML projects.
 - Concat
 - Minify
 - SASS
+- Source maps
